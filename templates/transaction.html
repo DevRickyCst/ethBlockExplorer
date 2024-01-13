@@ -1,0 +1,44 @@
+
+{% extends "base.html" %}
+{% set active = "transaction" %}
+
+{% block title %}Transaction Explorer{% endblock %}
+
+{% block body %}
+
+<p>Transaction exmple : 0x5c504ed432cb51138bcf09aa5e8a410dd4a1e204ef84bfed1be16dfba1b22060 </p>
+
+<form method="GET" acion="/block" class='px-auto'>
+    <div class="row g-3 align-items-center mx-auto d-inline-flex">
+        <div class="col-auto">
+            <label for="inputPassword6" class="col-form-label">Transaction Hash :</label>
+        </div>
+        <div class="col-auto">
+            <input type="text" class="form-control" id="exampleInputEmail1" name="id" aria-describedby="emailHelp" min=0>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    </div>
+</form>
+
+{% if transactionInfo %}
+
+    <h1 class="col-md-2 mx-auto my-5">Transaction Info{{ transactionInfo['number'] }} :</h1>
+
+    <table class="table table-striped mw-100 mx-5">
+
+        <tbody>
+            {% for key in transactionInfo.keys():  %}
+                <tr>
+                    <th scope="row">{{ key }} </th>
+                    <td> {{ transactionInfo[key] }} </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+{% endif %}
+
+{% endblock %}
