@@ -11,7 +11,7 @@ web3 = Web3(
 
 class eth:
     def get_block(self, id):
-        block_info = vars(web3.eth.getBlock(int(id)))
+        block_info = vars(web3.eth.get_block(int(id)))
         return block_info
 
     def get_transaction(self, trx_hash):
@@ -26,3 +26,9 @@ class eth:
         for i in range(5):
             blocks.append(self.get_block(last_block - i))
         return blocks
+
+
+def get_value(account):
+    address = web3.to_checksum_address(account)
+    w_balance = web3.eth.get_balance(address)
+    return(web3.from_wei(w_balance, 'ether'))

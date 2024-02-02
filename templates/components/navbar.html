@@ -1,0 +1,13 @@
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+    <div class="container d-flex position-relative">
+        <!-- Titre centré -->
+        <h2 class="position-absolute start-50 translate-middle-x">Ricky Web3 Website</h2>
+
+        <!-- Bouton à droite -->
+        {% if session['account'] %}
+            <button id="wallet" class="btn btn-outline-danger position-absolute end-0" onclick="deconnectToMetamask()">Disconnect</button>    
+        {% else %}
+            <button id="wallet" class="btn btn-outline-primary position-absolute end-0" onclick="connectToMetamask()">Connect to Wallet</button>
+        {% endif %}  
+    </div>
+</nav>

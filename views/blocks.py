@@ -1,6 +1,6 @@
 from flask import render_template
 from flask import request
-from src.eth import eth
+from src.eths import eth
 
 
 def render_block_view(id):
