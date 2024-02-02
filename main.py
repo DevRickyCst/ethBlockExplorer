@@ -1,12 +1,10 @@
 from flask import Flask, render_template, session, request
 
-from views.transactions import render_transaction_view
-from views.blocks import render_block_view
-from src.eths import get_value
+from src.eths import get_value, get_block, get_last_20_blocks, get_transaction
 
 app = Flask(__name__)
 
-app.secret_key = b''
+app.secret_key = b'e3ba6fc7ec44173d32d96d251bc692db7182a5b36ea233f045c64c8ae270cdb2'
 
 @app.route("/")
 def home():
@@ -20,13 +18,28 @@ def home():
 @app.route("/block")
 @app.route("/block/<id>")
 def block(id=None):
-    return render_block_view(id)
+    id = request.args.get("id")
+    if id != None:
+        return render_template("base.html", page = 'block', blockInfo=get_block(id))
+    else:
+        return render_template("base.html", page = 'block', blocksInfo=get_last_20_blocks())
 
 
 @app.route("/transaction")
 @app.route("/transaction/<id>")
 def transaction(id=None):
-    return render_transaction_view(id)
+    id = request.args.get("id")
+    if id:
+        try:
+            print(get_transaction( id))
+            return render_template('base.html', page = 'transaction', transactionInfo=get_transaction(id))
+        except:
+            print('mauvais transaction hash')
+            return render_template('base.html', page = 'transaction')
+        
+    else:
+        print('ok')
+        return render_template('base.html', page = 'transaction')
 
 @app.route("/dex")
 def dex(id=None):
@@ -46,6 +59,7 @@ def get_cookie():
 @app.route("/delete-cookie", methods=['POST'])
 def delete_cookie():
     del session['account']
+    del session['networkId']
     return {
         "Value":'Account bien supprimer de la session Flask'
     }

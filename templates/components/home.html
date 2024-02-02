@@ -1,5 +1,5 @@
 {% set network_mapping = {
-    '1': {"name":'Main net', 'url': 'https://etherscan.io/'},
+    '1': {"name":'Ethereum Mainnet', 'url': 'https://etherscan.io/'},
     '5' : {"name":'Goerli', 'url': 'https://sepolia.etherscan.io/'},
     '11155111': {"name":'Sepolia', 'url': 'https://sepolia.etherscan.io/'},
     '2018' : {"name":'Dev', 'url': 'https://sepolia.etherscan.io/'},
@@ -8,7 +8,7 @@
 <div class="container user-info-container">
     {% if session['account'] %}
         <div class="user-info">
-            <p><strong>Address:</strong> 
+            <p><strong>Your address:</strong> 
                 <b> 
                     <a href="https://etherscan.io/address/{{ session['account'] }}", target="_blank">
                         {{ session['account'] }}
@@ -16,7 +16,7 @@
                 </b>
             </p>
             <p>
-                <strong>Network:</strong> 
+                <strong>Connected to:</strong> 
                 <b><a href="{{ network_mapping[session['networkId']]['url'] }}", target="_blank">
                 {{ network_mapping[session['networkId']]['name'] }} </a></b></p>
             <p>

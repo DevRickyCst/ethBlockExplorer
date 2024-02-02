@@ -8,14 +8,6 @@
 ]%}
 
 
-
-{% extends "base.html" %}
-{% set active = "block" %}
-
-{% block title %}Block Explorer{% endblock %}
-
-{% block body %}
-
     <form method="GET" action="/block" class='w-50 mx-auto'>
         <div class="row g-3">
             <div class="col-auto">
@@ -66,5 +58,3 @@
         </tbody>
     </table>
 {% endif %}
-
-{% endblock %}
