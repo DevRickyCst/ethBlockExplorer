@@ -104,4 +104,41 @@ function deconnectToMetamask(event){
         )
 }
 
-console.log(window.location.pathname)
+document.addEventListener('DOMContentLoaded', function() {
+    // Attach event listener to form submission
+    document.getElementById('ethForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        
+        // Call sendEth function
+        sendEth();
+    });
+
+    // Function to send ETH
+    function sendEth() {
+        var ethAmount = document.getElementById("ethAmount").value;
+        var recipientAddress = document.getElementById("recipientAddress").value;
+
+        // Check if fields are filled
+        if (ethAmount === "" || recipientAddress === "") {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        // Convert ETH amount to Wei
+        var ethAmountWei = web3.utils.toWei(ethAmount, 'ether');
+
+        // Send transaction to MetaMask
+        web3.eth.sendTransaction({
+            to: recipientAddress,
+            value: ethAmountWei
+        })
+        .on('transactionHash', function(hash){
+            console.log("Transaction hash:", hash);
+            alert("Transaction sent successfully! Transaction hash: " + hash);
+        })
+        .on('error', function(error){
+            console.error("Transaction error:", error);
+            alert("Transaction error: " + error.message);
+        });
+    }
+});

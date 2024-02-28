@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <h1 class="mb-4">Échange décentralisé</h1>
+    {% if not session['account'] %}
+        <div class="alert alert-warning" role="alert">
+            You need to log-in before making any exchange ! 
+        </div>
+    {% endif %}
+    <div class="row">
+      <div class="col-md-6">
+        <form  id="ethForm">
+          <div class="mb-3">
+            <label for="ethAmount" class="form-label">Montant d'ETH</label>
+            <input type="text" class="form-control" id="ethAmount" placeholder="Entrez le montant d'ETH">
+          </div>
+          <div class="mb-3">
+            <label for="recipientAddress" class="form-label">Adresse du destinataire</label>
+            <input type="text" class="form-control" id="recipientAddress" placeholder="Entrez l'adresse du destinataire">
+          </div>
+            {% if not session['account'] %}
+                <button type="submit" class="btn btn-primary" id="sendEthButton" disabled>Envoyer ETH</button>
+            {% else %}
+                <button type="submit" class="btn btn-primary" id="sendEthButton">Envoyer ETH</button>
+            {% endif %}        
+        </form>
+      </div>
+    </div>
+  </div>

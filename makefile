@@ -1,2 +1,3 @@
 run:
-	flask --app main run --debug run
+	source venv/bin/activate
+	python3 main.py
